@@ -1,0 +1,10 @@
+INSERT INTO CLIENT (NAME, CONTACT_EMAIL) VALUES ('Client 1', 'client-1@email.com');
+INSERT INTO CLIENT (NAME, CONTACT_EMAIL) VALUES ('Client 2', 'client-2@email.com');
+INSERT INTO CLIENT (NAME, CONTACT_EMAIL) VALUES ('Client 3', 'client-3@email.com');
+INSERT INTO CLIENT (NAME, CONTACT_EMAIL) VALUES ('Client 4', 'client-4@email.com');
+INSERT INTO CLIENT (NAME, CONTACT_EMAIL) VALUES ('Client 5', 'client-5@email.com');
+INSERT INTO CLIENT (NAME, CONTACT_EMAIL) VALUES ('Client 6', 'client-6@email.com');
+INSERT INTO CLIENT (NAME, CONTACT_EMAIL) VALUES ('Client 7', 'client-7@email.com');
+INSERT INTO CLIENT (NAME, CONTACT_EMAIL) VALUES ('Client 8', 'client-8@email.com');
+INSERT INTO CLIENT (NAME, CONTACT_EMAIL) VALUES ('Client 9', 'client-9@email.com');
+INSERT INTO CLIENT (NAME, CONTACT_EMAIL) VALUES ('Client 10', 'client-10@email.com');

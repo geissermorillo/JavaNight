@@ -1,0 +1,11 @@
+INSERT INTO FREELANCER (NAME, EMAIL, PROFESSION, RATE) VALUES ('Freelancer 1', 'freelancer-1@email.com', 'Plumbing', 1);
+INSERT INTO FREELANCER (NAME, EMAIL, PROFESSION, RATE) VALUES ('Freelancer 2', 'freelancer-2@email.com', 'Power Supply', 1);
+INSERT INTO FREELANCER (NAME, EMAIL, PROFESSION, RATE) VALUES ('Freelancer 3', 'freelancer-3@email.com', 'Masonry', 1);
+INSERT INTO FREELANCER (NAME, EMAIL, PROFESSION, RATE) VALUES ('Freelancer 4', 'freelancer-4@email.com', 'Carpentry', 5);
+INSERT INTO FREELANCER (NAME, EMAIL, PROFESSION, RATE) VALUES ('Freelancer 5', 'freelancer-5@email.com', 'Plumbing', 2);
+INSERT INTO FREELANCER (NAME, EMAIL, PROFESSION, RATE) VALUES ('Freelancer 6', 'freelancer-6@email.com', 'Plumbing', 3);
+INSERT INTO FREELANCER (NAME, EMAIL, PROFESSION, RATE) VALUES ('Freelancer 7', 'freelancer-7@email.com', 'Carpentry', 1);
+INSERT INTO FREELANCER (NAME, EMAIL, PROFESSION, RATE) VALUES ('Freelancer 8', 'freelancer-8@email.com', 'Power Supply', 2);
+INSERT INTO FREELANCER (NAME, EMAIL, PROFESSION, RATE) VALUES ('Freelancer 9', 'freelancer-9@email.com', 'Masonry', 2);
+INSERT INTO FREELANCER (NAME, EMAIL, PROFESSION, RATE) VALUES ('Freelancer 10','freelancer-10@email.com', 'Masonry', 3);
+INSERT INTO FREELANCER (NAME, EMAIL, PROFESSION, RATE) VALUES ('Freelancer 11','freelancer-11@email.com', 'Masonry', 3);
