@@ -4,6 +4,7 @@ import com.javanight.assistanceservice.entity.Assistance;
 import com.javanight.assistanceservice.model.Freelancer;
 import com.javanight.assistanceservice.service.AssistanceService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,10 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Map;
+import java.util.TreeSet;
 
 @RestController
 @Slf4j
@@ -44,9 +47,16 @@ public class AssistanceController {
     }
 
 
-    @GetMapping("/getFreelancerRankingByAssistanceId")
-    public ResponseEntity<Map<String, List<Freelancer>>> getFreelancerRankingByAssistanceId(@RequestParam(value = "professionId", required = false) Integer assistanceId) {
+    @GetMapping("/getFreelancerRankedByAssistanceId")
+    public ResponseEntity<Map<String, TreeSet<Freelancer>>> getFreelancerRankingByAssistanceId(@RequestParam(value = "professionId", required = false) Integer assistanceId) {
         log.info("returning all freelancers ranked by profession");
         return ResponseEntity.ok(this.assistanceService.getFreelancerRankingByAssistanceId(assistanceId));
+    }
+
+    @GetMapping("/generateTreeOfRequests")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void generateTreeOfRequests(@RequestParam(value = "depth", required = false) Integer depth) throws Exception {
+        log.info("Generating requests tree with depth {}", depth);
+        this.assistanceService.generateTreeOfRequests(depth);
     }
 }

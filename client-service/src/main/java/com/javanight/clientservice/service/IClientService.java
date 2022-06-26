@@ -20,4 +20,10 @@ public interface IClientService {
     List<Freelancer> getAllFreelancers();
 
     Map<String, List<Freelancer>> getFreelancerRankingByAssistanceId(Integer assistanceId);
+
+    void generateTreeOfRequests(Integer depth) throws Exception;
+
+    void assistanceGenerateTreeOfRequests(Integer depth);
+
+    void freelancerGenerateTreeOfRequests(Integer depth);
 }

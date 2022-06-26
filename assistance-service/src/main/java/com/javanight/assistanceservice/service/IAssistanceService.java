@@ -5,6 +5,7 @@ import com.javanight.assistanceservice.model.Freelancer;
 
 import java.util.List;
 import java.util.Map;
+import java.util.TreeSet;
 
 public interface IAssistanceService {
     Assistance createAssistance(Assistance assistance);
@@ -13,5 +14,9 @@ public interface IAssistanceService {
 
     List<Assistance> getAllAssistance();
 
-    Map<String, List<Freelancer>> getFreelancerRankingByAssistanceId(Integer assistanceId);
+    Map<String, TreeSet<Freelancer>> getFreelancerRankingByAssistanceId(Integer assistanceId);
+
+    void generateTreeOfRequests(Integer depth) throws Exception;
+
+    void freelancerGenerateTreeOfRequests(Integer depth);
 }

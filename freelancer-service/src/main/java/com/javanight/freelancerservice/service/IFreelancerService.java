@@ -13,4 +13,6 @@ public interface IFreelancerService {
     List<Freelancer> getAllFreelancers();
 
     List<Freelancer> getFreelancersByProfession(String profession);
+
+    void generateTreeOfRequests(Integer depth) throws Exception;
 }
