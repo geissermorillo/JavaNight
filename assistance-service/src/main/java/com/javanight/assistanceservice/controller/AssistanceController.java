@@ -49,7 +49,7 @@ public class AssistanceController {
 
     @GetMapping("/getFreelancerRankedByAssistanceId")
     public ResponseEntity<Map<String, TreeSet<Freelancer>>> getFreelancerRankingByAssistanceId(@RequestParam(value = "professionId", required = false) Integer assistanceId) {
-        log.info("returning all freelancers ranked by profession");
+        log.info("Getting all freelancers ranked by profession");
         return ResponseEntity.ok(this.assistanceService.getFreelancerRankingByAssistanceId(assistanceId));
     }
 

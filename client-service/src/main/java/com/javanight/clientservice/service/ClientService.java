@@ -8,18 +8,17 @@ import com.javanight.clientservice.feignClient.FreelancerFeignClient;
 import com.javanight.clientservice.model.Assistance;
 import com.javanight.clientservice.model.Freelancer;
 import com.javanight.clientservice.repository.IClientRepository;
-import com.javanight.clientservice.utils.ProxyInstanceUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
+import org.springframework.cloud.sleuth.annotation.SpanTag;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-@EnableTracing(value = true)
+@EnableTracing(enabled = false)
 @Service
 @Slf4j
 public class ClientService implements IClientService {
@@ -28,7 +27,6 @@ public class ClientService implements IClientService {
     private final AssistanceFeignClient assistanceFeignClient;
     private final FreelancerFeignClient freelancerFeignClient;
     private final Tracer tracer;
-    private final ProxyInstanceUtils proxyInstanceUtils;
 
 
     private final String ASSISTANCE_SERVICE_URL = "http://localhost:8081/assistance";
@@ -43,62 +41,59 @@ public class ClientService implements IClientService {
 
     public ClientService(IClientRepository clientRepository, RestTemplate restTemplate,
                          AssistanceFeignClient assistanceFeignClient,
-                         FreelancerFeignClient freelancerFeignClient, Tracer tracer, ProxyInstanceUtils proxyInstanceUtils) {
+                         FreelancerFeignClient freelancerFeignClient, Tracer tracer) {
         this.clientRepository = clientRepository;
         this.restTemplate = restTemplate;
         this.assistanceFeignClient = assistanceFeignClient;
         this.freelancerFeignClient = freelancerFeignClient;
         this.tracer = tracer;
-        this.proxyInstanceUtils = proxyInstanceUtils;
     }
 
-    @PostConstruct
-    private void init() {
-        proxiedLog = this.proxyInstanceUtils.getLoggerProxyInstance(log, tracer);
-    }
-
-    @Override
     @EnableTracing
-    public Client createClient(Client client) {
-        proxiedLog.info("Saving client {}", client.getName());
+    @Override
+    public Client createClient(@SpanTag("Client Parameter") Client client) {
+        log.info("Saving client {}", client.getName());
         return this.clientRepository.save(client);
     }
 
+    @EnableTracing(enabled = true, tags = {"My Tag 1: Tagged by annotation 1", "My Tag 2: Tagged by annotation 2"})
     @Override
     public Client getClientById(int id) {
-        proxiedLog.info("Getting client {}", id);
+        log.info("Getting client {}", id);
         return this.clientRepository.findById(Integer.valueOf(id)).orElse(null);
     }
 
+    @EnableTracing(enabled = false)
     @Override
     public List<Client> getAllClients() {
-        proxiedLog.info("Getting all clients");
+        log.info("Getting all clients");
         return this.clientRepository.findAll();
     }
 
+
     @Override
     public List<Assistance> getAllAssistanceAvailable() {
-        proxiedLog.info("Getting all assistance available");
+        log.info("Getting all assistance available");
 //        return this.restTemplate.getForObject(ASSISTANCE_SERVICE_URL, List.class);
         return this.assistanceFeignClient.getAllAssistance();
     }
 
     @Override
     public List<Freelancer> getAllFreelancers() {
-        proxiedLog.info("Getting all freelancers available");
+        log.info("Getting all freelancers available");
         return this.restTemplate.getForObject(FREELANCER_SERVICE_URL, List.class);
     }
-
+    @EnableTracing(tags = "Kind: Producer")
     @Override
     public Map<String, List<Freelancer>> getFreelancerRankingByAssistanceId(Integer assistanceId) {
-        proxiedLog.info("Getting freelancers ranked grouped by assistance <{}>", assistanceId);
+        log.info("Getting freelancers ranked grouped by assistance <{}>", assistanceId);
         String url = ASSISTANCE_SERVICE_URL + "/getFreelancerRankedByAssistanceId" + Optional.ofNullable(assistanceId).map(id -> "?"+id).orElse("");
         return this.restTemplate.getForObject(url, Map.class);
     }
 
     @Override
     public void generateTreeOfRequests(Integer depth) throws Exception {
-        proxiedLog.info("Generating requests tree with depth {}", depth);
+        log.info("Generating requests tree with depth {}", depth);
         if (Optional.ofNullable(depth).orElse(-1) <= 0) {
             throw new Exception("Depth param must be greater then zero");
         }

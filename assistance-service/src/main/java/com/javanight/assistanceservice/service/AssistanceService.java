@@ -56,7 +56,7 @@ public class AssistanceService implements IAssistanceService {
 
     @Override
     public Map<String, TreeSet<Freelancer>> getFreelancerRankingByAssistanceId(Integer assistanceId) {
-        log.info("Getting freelancers ranked grouped by assistance <{}>", assistanceId);
+        log.info("Getting freelancers ranked grouped by assistance {}", assistanceId);
         String url = FREELANCER_SERVICE_URL +
                 Optional.ofNullable(assistanceId).map(id -> "/getFreelancersByProfession/%s").orElse("");
 
