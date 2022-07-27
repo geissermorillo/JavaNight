@@ -26,7 +26,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
+		<!--Dependencies for sleuth and zipkin-->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-sleuth-zipkin</artifactId>
@@ -36,15 +36,40 @@
 			<artifactId>spring-cloud-starter-sleuth</artifactId>
 		</dependency>
 
+<!--		Dependency needed for use sleuth with log4j2-->
+		<dependency>
+			<groupId>io.zipkin.brave</groupId>
+			<artifactId>brave-context-log4j2</artifactId>
+			<version>5.13.10</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
+		</dependency>
+
+
+
+
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-<!--			<version>5.2.8.RELEASE</version>-->
 		</dependency>
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
-<!--			<version>1.9.2</version>-->
 		</dependency>
 
 		<dependency>
@@ -68,6 +93,7 @@
 		</dependency>
 	</dependencies>
 
+	<!--needed for sleuth and zipkin-->
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -96,5 +122,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>

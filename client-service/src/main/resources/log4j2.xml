@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration xmlns:xi="http://www.w3.org/2001/XInclude">
+
+
+    <properties>
+        <!-- You can override this to have a custom pattern -->
+        <property name="SERVICE_NAME" value="${bundle:application:spring.application.name}"/>
+        <property name="LOG_PATTERN"
+                  value="%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint}
+%clr{%5p [${SERVICE_NAME}, %X{traceId}, %X{spanId}, %X{Export}]} %clr{%X{PID}}{magenta} %clr{---}{faint}
+%clr{[%15.15t]}{faint} %clr{%-40.40logger{1}}{cyan} %clr{:}{faint}
+%m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+    </properties>
+
+
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT" >
+<!--            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss}{faint} %-5level %c{ %{service},%{traceId}, %{span}, %{parent} }:%L - %m%n"/>-->
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+
+
+        <RollingFile name="client-pattern-layout"
+                     fileName="C:/Desarrollo/Workspace/JavaNight/logs/client-pattern.log"
+                     filePattern="${env:ACCUITY_ROOT}/logs/client-pattern-%d{yyyy-MM-dd}-%i.log.gz"
+                     immediateFlush="true">
+            <PatternLayout
+                    pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <!-- The TimeBasedTriggeringPolicy causes a rollover once the date/time pattern no longer applies to the active file. This policy accepts an interval attribute which indicates how frequently the rollover should occur based on the time pattern and a modulate boolean attribute.-->
+                <TimeBasedTriggeringPolicy/>
+                <!-- The SizeBasedTriggeringPolicy causes a rollover once the file has reached the specified size. -->
+                <SizeBasedTriggeringPolicy size="250 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy>
+                <Delete basePath="C:/Desarrollo/Workspace/JavaNight/logs/">
+                    <IfFileName regex="client-pattern-\d.*.log.gz">
+                        <IfLastModified age="7d"/>
+                    </IfFileName>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="client-pattern-layout"/>
+        </Root>
+    </Loggers>
+</configuration>

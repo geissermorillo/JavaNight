@@ -8,7 +8,6 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
-import zipkin2.Annotation;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -41,7 +40,7 @@ public class EnableTracingInterceptor {
     public Object trySample(ProceedingJoinPoint proceedingJoinPoint, EnableTracing enableTracing) throws Throwable {
         Object result = null;
         if (enableTracing != null) {
-            Span span = this.tracer.nextSpan();
+            Span span = this.tracer.currentSpan();
             try (Tracer.SpanInScope ws = this.tracer.withSpanInScope(span.start())) {
                 // Adding default tags
                 this.addDefaultTags(span, proceedingJoinPoint);
