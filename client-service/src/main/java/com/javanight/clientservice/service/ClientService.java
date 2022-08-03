@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-@EnableTracing(enabled = false)
 @Service
 @Slf4j
 public class ClientService implements IClientService {
@@ -53,6 +52,7 @@ public class ClientService implements IClientService {
     @Override
     public Client createClient(@SpanTag("Client Parameter") Client client) {
         log.info("Saving client {}", client.getName());
+        this.tracer.currentSpan().flush();
         return this.clientRepository.save(client);
     }
 
@@ -60,13 +60,15 @@ public class ClientService implements IClientService {
     @Override
     public Client getClientById(int id) {
         log.info("Getting client {}", id);
+        this.tracer.currentSpan().flush();
         return this.clientRepository.findById(Integer.valueOf(id)).orElse(null);
     }
 
-    @EnableTracing(enabled = false)
+    @EnableTracing
     @Override
     public List<Client> getAllClients() {
         log.info("Getting all clients");
+        this.tracer.currentSpan().flush();
         return this.clientRepository.findAll();
     }
 
@@ -74,6 +76,7 @@ public class ClientService implements IClientService {
     @Override
     public List<Assistance> getAllAssistanceAvailable() {
         log.info("Getting all assistance available");
+        this.tracer.currentSpan().flush();
 //        return this.restTemplate.getForObject(ASSISTANCE_SERVICE_URL, List.class);
         return this.assistanceFeignClient.getAllAssistance();
     }
@@ -81,16 +84,20 @@ public class ClientService implements IClientService {
     @Override
     public List<Freelancer> getAllFreelancers() {
         log.info("Getting all freelancers available");
+        this.tracer.currentSpan().flush();
         return this.restTemplate.getForObject(FREELANCER_SERVICE_URL, List.class);
     }
+
     @EnableTracing(tags = "Kind: Producer")
     @Override
     public Map<String, List<Freelancer>> getFreelancerRankingByAssistanceId(Integer assistanceId) {
         log.info("Getting freelancers ranked grouped by assistance <{}>", assistanceId);
+        this.tracer.currentSpan().flush();
         String url = ASSISTANCE_SERVICE_URL + "/getFreelancerRankedByAssistanceId" + Optional.ofNullable(assistanceId).map(id -> "?"+id).orElse("");
         return this.restTemplate.getForObject(url, Map.class);
     }
 
+    @EnableTracing
     @Override
     public void generateTreeOfRequests(Integer depth) throws Exception {
         log.info("Generating requests tree with depth {}", depth);

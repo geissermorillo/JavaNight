@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -48,7 +49,9 @@ public class AssistanceController {
 
 
     @GetMapping("/getFreelancerRankedByAssistanceId")
-    public ResponseEntity<Map<String, TreeSet<Freelancer>>> getFreelancerRankingByAssistanceId(@RequestParam(value = "professionId", required = false) Integer assistanceId) {
+    public ResponseEntity<Map<String, TreeSet<Freelancer>>> getFreelancerRankingByAssistanceId(
+            @RequestParam(value = "professionId", required = false) Integer assistanceId,
+            @RequestHeader Map<String, String> headers) {
         log.info("Getting all freelancers ranked by profession");
         return ResponseEntity.ok(this.assistanceService.getFreelancerRankingByAssistanceId(assistanceId));
     }

@@ -44,6 +44,7 @@ public class ClientController {
 
     @GetMapping
     public ResponseEntity<List<Client>> getAllClients() {
+        log.info("Getting all clients (controller)");
         return ResponseEntity.ok(this.clientService.getAllClients());
     }
 

@@ -19,28 +19,28 @@ public class EnableTracingInterceptor {
     @Autowired
     private Tracer tracer;
 
-    @Pointcut(value = "execution(@com.javanight.clientservice.annotations.EnableTracing * *.*(..))")
+    @Pointcut(value = "@annotation(com.javanight.clientservice.annotations.EnableTracing)")
     void annotatedMethod() {}
 
-    @Pointcut(value = "execution(* (@com.javanight.clientservice.annotations.EnableTracing *).*(..))")
-    void methodOfAnnotatedClass() {}
+//    @Pointcut(value = "execution(* (@com.javanight.clientservice.annotations.EnableTracing *).*(..))")
+//    void methodOfAnnotatedClass() {}
 
     @Around(value = "annotatedMethod() && @annotation(enableTracingAtMethodLevel)")
     public Object adviseAnnotatedMethods(ProceedingJoinPoint proceedingJoinPoint, EnableTracing enableTracingAtMethodLevel) throws Throwable {
         return  this.trySample(proceedingJoinPoint, enableTracingAtMethodLevel);
     }
 
-    @Around(value = "methodOfAnnotatedClass() && !annotatedMethod() && @within(enableTracingAtClassLevel)")
-    public Object adviseMethodsOfAnnotatedClass(ProceedingJoinPoint proceedingJoinPoint, EnableTracing enableTracingAtClassLevel)
-            throws Throwable {
-        return this.trySample(proceedingJoinPoint, enableTracingAtClassLevel);
-    }
+//    @Around(value = "methodOfAnnotatedClass() && !annotatedMethod() && @within(enableTracingAtClassLevel)")
+//    public Object adviseMethodsOfAnnotatedClass(ProceedingJoinPoint proceedingJoinPoint, EnableTracing enableTracingAtClassLevel)
+//            throws Throwable {
+//        return this.trySample(proceedingJoinPoint, enableTracingAtClassLevel);
+//    }
 
 
     public Object trySample(ProceedingJoinPoint proceedingJoinPoint, EnableTracing enableTracing) throws Throwable {
         Object result = null;
         if (enableTracing != null) {
-            Span span = this.tracer.currentSpan();
+            Span span = this.tracer.nextSpan();
             try (Tracer.SpanInScope ws = this.tracer.withSpanInScope(span.start())) {
                 // Adding default tags
                 this.addDefaultTags(span, proceedingJoinPoint);
@@ -50,6 +50,7 @@ public class EnableTracingInterceptor {
             } finally {
                 if(this.isEnabledToTrace(enableTracing)) {
                     span.finish();
+//                    span.flush();
                 } else {
                     span.abandon();
                 }
