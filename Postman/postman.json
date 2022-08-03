@@ -1,14 +1,41 @@
 {
 	"info": {
-		"_postman_id": "f968ef12-95bd-4f1e-988f-869f007e350d",
+		"_postman_id": "9f629d45-843d-4045-a6be-f54dd53938fe",
 		"name": "JavaNight",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "18447212"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "Client-Service",
 			"item": [
+				{
+					"name": "CreateClient",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Client 11\",\r\n    \"contactEmail\": \"client-11@email.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/client",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"client"
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "GetClientById",
 					"request": {
@@ -37,12 +64,31 @@
 					"response": []
 				},
 				{
+					"name": "GetAllClients",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/client",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"client"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "GetAllAssistanceAvailable",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/client/AllAssistanceAvailable",
+							"raw": "http://localhost:8080/client/getAllAssistanceAvailable",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -50,7 +96,27 @@
 							"port": "8080",
 							"path": [
 								"client",
-								"AllAssistanceAvailable"
+								"getAllAssistanceAvailable"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllFreelancersAvailable",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/client/getAllAssistanceAvailable",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"client",
+								"getAllAssistanceAvailable"
 							]
 						}
 					},
@@ -77,12 +143,12 @@
 					"response": []
 				},
 				{
-					"name": "GetAllFreelancersAvailable",
+					"name": "GenerateTreeOfRequests",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/client/AllAssistanceAvailable",
+							"raw": "http://localhost:8080/client/generateTreeOfRequests?depth=100",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -90,54 +156,13 @@
 							"port": "8080",
 							"path": [
 								"client",
-								"AllAssistanceAvailable"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GetAllClients",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/client",
-							"protocol": "http",
-							"host": [
-								"localhost"
+								"generateTreeOfRequests"
 							],
-							"port": "8080",
-							"path": [
-								"client"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "CreateClient",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Client 11\",\r\n    \"contactEmail\": \"client-11@email.com\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"query": [
+								{
+									"key": "depth",
+									"value": "100"
 								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/client",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"client"
 							]
 						}
 					},
@@ -148,6 +173,53 @@
 		{
 			"name": "Assistance-Service",
 			"item": [
+				{
+					"name": "CreateAssistance",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Assistance\",\r\n    \"description\": \"Description 1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/assistance",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"assistance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllAssistance",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/assistance",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"assistance"
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "GetAssistanceById",
 					"request": {
@@ -176,42 +248,46 @@
 					"response": []
 				},
 				{
-					"name": "GetAllAssistance",
+					"name": "GetFreelancerRankedByAssistanceId",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8081/assistance",
+							"raw": "http://localhost:8081/assistance/getFreelancerRankedByAssistanceId",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8081",
 							"path": [
-								"assistance"
+								"assistance",
+								"getFreelancerRankedByAssistanceId"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "CreateAssistance",
+					"name": "GenerateTreeOfRequests",
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \r\n}"
-						},
 						"url": {
-							"raw": "http://localhost:8081/assistance",
+							"raw": "http://localhost:8081/assistance/generateTreeOfRequests?depth=50",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8081",
 							"path": [
-								"assistance"
+								"assistance",
+								"generateTreeOfRequests"
+							],
+							"query": [
+								{
+									"key": "depth",
+									"value": "50"
+								}
 							]
 						}
 					},
@@ -222,6 +298,53 @@
 		{
 			"name": "Freelancer-Service",
 			"item": [
+				{
+					"name": "CreateFreelancer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rate\": 1,\r\n    \"name\": \"Freelancer Test\",\r\n    \"email\": \"freelancer-test@email.com\",\r\n    \"profession\": \"Test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8082/freelancer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"freelancer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllFreelancers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/freelancer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"freelancer"
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "GetFreelancerById",
 					"request": {
@@ -250,48 +373,55 @@
 					"response": []
 				},
 				{
-					"name": "GetAllFreelancers",
+					"name": "getFreelancersByProfession",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8082/freelancer",
+							"raw": "http://localhost:8082/freelancer/getFreelancersByProfession/:profession",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8082",
 							"path": [
-								"freelancer"
+								"freelancer",
+								"getFreelancersByProfession",
+								":profession"
+							],
+							"variable": [
+								{
+									"key": "profession",
+									"value": "Plumbing"
+								}
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "GetAllFreelancers Copy",
+					"name": "generateTreeOfRequests",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8082/freelancer",
+							"raw": "http://localhost:8082/freelancer/generateTreeOfRequests?depth=100",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8082",
 							"path": [
-								"freelancer"
+								"freelancer",
+								"generateTreeOfRequests"
+							],
+							"query": [
+								{
+									"key": "depth",
+									"value": "100"
+								}
 							]
 						}
-					},
-					"response": []
-				},
-				{
-					"name": "CreateFreelancer",
-					"request": {
-						"method": "GET",
-						"header": []
 					},
 					"response": []
 				}
