@@ -1,4 +1,9 @@
-## Checklist before requesting a review
+## For more information see:
+[PR best practices guide](https://confluence.fpa.rbxd.ds/display/ID/DRAFT+-+Pull+Request+Best+practices)
+
+[GIT Commit message guide](https://confluence.fpa.rbxd.ds/display/ID/Git+Commit+message)
+
+## Verififications that should have been when create PR
 - [ ] Are all commit messages meaningful?
 - [ ] Has a build been run locally?
 - [ ] Have all unused imports been removed?
@@ -7,4 +12,10 @@
 - [ ] Is it an XQuery script?
     - [ ] Is this code is readable enough?
     - [ ] Are writing operation restricted by a condition?
-- [ ] All the AC's are covered
+- [ ] All the AC's are covered?
+- [ ] Brief description added?
+- [ ] Have the reviewers been added?
+
+## Verififications that must be done just before merge PR
+- [ ] Are there conversations without resolution?
+- [ ] Check if require Squash befor merge
