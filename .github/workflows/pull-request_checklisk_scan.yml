@@ -2,7 +2,7 @@ name: 'PR Tasks Completed Check'
 on: 
   pull_request:
     types: [opened, reopened, synchronize]
-    branches: [ main ]
+    branches: [ main, master ]
 
 jobs:
   task-check:
