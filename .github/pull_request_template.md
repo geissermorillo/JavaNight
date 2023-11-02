@@ -15,7 +15,5 @@
 - [ ] All the AC's are covered?
 - [ ] Brief description added?
 - [ ] Have the reviewers been added?
-
-## Verififications that must be done just before merge PR
 - [ ] Are there conversations without resolution?
 - [ ] Check if require Squash befor merge
