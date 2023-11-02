@@ -3,7 +3,7 @@
 
 [GIT Commit message guide](https://confluence.fpa.rbxd.ds/display/ID/Git+Commit+message)
 
-## Verififications that should have been when create PR
+# Checklist that should have been when create PR:
 - [ ] Are all commit messages meaningful?
 - [ ] Has a build been run locally?
 - [ ] Have all unused imports been removed?
